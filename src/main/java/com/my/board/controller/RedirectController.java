@@ -24,18 +24,19 @@ public class RedirectController {
     }
 
     @RequestMapping(value = "requestMapping",
-        method = RequestMethod.GET)
+            method = RequestMethod.GET)
     // Spring 5.0 아래 버전에서 사용
-    // Spring 5.0 이상은 @GetMapping 사용 가능
+    // Spring 5.0 이상은  @GetMapping 사용 가능
     public String requestMapping(Model model) {
         model.addAttribute("msg", "RequestMapping");
         return "/test/page";
     }
+
     @GetMapping("modelAndView")
     public ModelAndView modelAndView(Model model) {
         String msg = "ModelAndView";
-        model.addAttribute("msg",msg);
-        return new ModelAndView("test/page");
+        model.addAttribute("msg", msg);
+        return new ModelAndView("/test/page");
     }
 
     @GetMapping("redirectView")
@@ -51,7 +52,6 @@ public class RedirectController {
         redirectAttributes.addFlashAttribute("state", msg);
         return new RedirectView("/mapping");
     }
-
     @GetMapping("naver")
     public String naver() {
         return "redirect:https://naver.com";
@@ -59,6 +59,6 @@ public class RedirectController {
 
     @GetMapping("local")
     public String local() {
-        return "redirect:https://localhost:3000/main";
+        return "redirect:http://localhost:3000/main";
     }
 }
