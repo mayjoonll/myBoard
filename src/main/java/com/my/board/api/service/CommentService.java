@@ -20,12 +20,16 @@ public class CommentService {
         Map<String, Object> map = new HashMap<>();
         if (ObjectUtils.isEmpty(comment)) {
             map.put("dto", null);
-            map.put("article", null);
+            map.put("articleId", null);
             return map;
         } else {
             map.put("dto", CommentDto.fromComment(comment));
-            map.put("article", comment.getArticle().getId());
+            map.put("articleId", comment.getArticle().getId());
             return map;
         }
+    }
+
+    public void insertComment(Long articleId, CommentDto dto) {
+        dao.insertComment(articleId, CommentDto.fromDto(dto));
     }
 }
